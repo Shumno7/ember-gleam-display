@@ -53,7 +53,7 @@ export const BLADE_PROFILES: Record<BladeKey, BladeProfile> = {
       "font-label font-medium uppercase tracking-[0.42em] text-[0.58rem] text-gold",
     detailClass:
       "font-label font-light uppercase tracking-[0.26em] text-[0.6rem] text-gold-bright/75",
-    ruleClass: "h-[4px] w-[3rem] bg-gold",
+    ruleClass: "h-[3px] w-[3rem] bg-gold",
   },
   longsword: {
     key: "longsword",
@@ -100,14 +100,14 @@ export const BLADE_PROFILES: Record<BladeKey, BladeProfile> = {
       "--slot-mark": "0.12",
     } as CSSProperties,
     name:
-      "font-elegant font-semibold uppercase leading-[0.95] tracking-[0.12em] text-[clamp(2rem,7.2vw,3.2rem)] text-gold-bright",
+      "font-elegant font-semibold uppercase leading-[0.95] tracking-[0.05em] text-[clamp(2rem,7.2vw,3.2rem)] text-gold-bright",
     tagline:
       "font-elegant font-light italic tracking-[0.05em] text-[1.1rem] text-gold",
     labelClass:
       "font-label font-normal uppercase tracking-[0.4em] text-[0.58rem] text-gold",
     detailClass:
       "font-label font-light uppercase tracking-[0.26em] text-[0.6rem] text-gold-bright/75",
-    ruleClass: "h-px w-20 origin-left -rotate-[7deg] bg-gold/65",
+    ruleClass: "h-px w-24 bg-gradient-to-r from-gold/80 to-transparent",
   },
   smallsword: {
     key: "smallsword",
@@ -125,6 +125,8 @@ export const BLADE_PROFILES: Record<BladeKey, BladeProfile> = {
       "--slot-radius": "45% 45% 12px 12px / 28% 28% 12px 12px",
       "--slot-clip": "none",
       "--slot-mark": "0.1",
+      "--pad-top": "clamp(3.5rem, 13%, 5.25rem)",
+      "--top-inset": "11%",
     } as CSSProperties,
     name:
       "font-elegant font-light uppercase leading-[1] tracking-[0.18em] text-[clamp(1.6rem,5.6vw,2.4rem)] text-gold-bright",

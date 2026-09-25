@@ -161,6 +161,9 @@
   --slot-radius: 4px;
   --slot-clip: none;
   --slot-mark: 0.14;
+  --pad: clamp(1.5rem, 5.5%, 2.75rem);
+  --pad-top: var(--pad);
+  --top-inset: 0px;
 }
 
 .dark {
@@ -314,6 +317,23 @@
   inset: 0;
   pointer-events: none;
   background: var(--gradient-scrim);
+}
+
+@utility skyforge-content {
+  position: relative;
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: var(--pad);
+  padding-top: var(--pad-top);
+}
+
+@utility skyforge-crown {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-inline: var(--top-inset);
 }
 
 @keyframes skyforge-sheen {

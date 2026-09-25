@@ -55,8 +55,8 @@ export function SkyforgeCard({
 
           <div className="skyforge-scrim" />
 
-          <div className="relative flex h-full flex-col justify-between p-[clamp(1.5rem,5.5%,2.75rem)]">
-            <div className="flex items-baseline justify-between">
+          <div className="skyforge-content">
+            <div className="skyforge-crown">
               <span className={profile.labelClass}>{profile.label}</span>
               <span className={profile.detailClass}>{profile.numeral}</span>
             </div>
