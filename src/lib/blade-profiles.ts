@@ -38,11 +38,11 @@ export const BLADE_PROFILES: Record<BladeKey, BladeProfile> = {
         "polygon(0 22px, 22px 0, calc(100% - 22px) 0, 100% 22px, 100% calc(100% - 22px), calc(100% - 22px) 100%, 22px 100%, 0 calc(100% - 22px))",
       "--face-radius": "0px",
       "--face-clip":
-        "polygon(0 20px, 20px 0, calc(100% - 20px) 0, 100% 20px, 100% calc(100% - 20px), calc(100% - 20px) 100%, 20px 100%, 0 calc(100% - 20px))",
+        "polygon(0 18px, 18px 0, calc(100% - 18px) 0, 100% 18px, 100% calc(100% - 18px), calc(100% - 18px) 100%, 18px 100%, 0 calc(100% - 18px))",
       "--slot-inset": "14px",
       "--slot-radius": "0px",
       "--slot-clip":
-        "polygon(0 16px, 16px 0, calc(100% - 16px) 0, 100% 16px, 100% calc(100% - 16px), calc(100% - 16px) 100%, 16px 100%, 0 calc(100% - 16px))",
+        "polygon(0 12px, 12px 0, calc(100% - 12px) 0, 100% 12px, 100% calc(100% - 12px), calc(100% - 12px) 100%, 12px 100%, 0 calc(100% - 12px))",
       "--slot-mark": "0.2",
     } as CSSProperties,
     name:
@@ -92,7 +92,7 @@ export const BLADE_PROFILES: Record<BladeKey, BladeProfile> = {
       "--edge-width": "2px",
       "--edge-radius": "12px 12px 12px 96px",
       "--edge-clip": "none",
-      "--face-radius": "10px 10px 10px 90px",
+      "--face-radius": "10px 10px 10px 94px",
       "--face-clip": "none",
       "--slot-inset": "16px",
       "--slot-radius": "8px 8px 8px 78px",
@@ -119,7 +119,7 @@ export const BLADE_PROFILES: Record<BladeKey, BladeProfile> = {
       "--edge-width": "1px",
       "--edge-radius": "46% 46% 20px 20px / 32% 32% 20px 20px",
       "--edge-clip": "none",
-      "--face-radius": "45% 45% 18px 18px / 31% 31% 18px 18px",
+      "--face-radius": "45.8% 45.8% 19px 19px / 31.85% 31.85% 19px 19px",
       "--face-clip": "none",
       "--slot-inset": "20px",
       "--slot-radius": "45% 45% 12px 12px / 28% 28% 12px 12px",
