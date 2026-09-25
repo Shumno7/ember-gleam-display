@@ -59,6 +59,22 @@
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
+
+  /* Armory palette */
+  --color-ink: var(--ink);
+  --color-ink-deep: var(--ink-deep);
+  --color-charcoal: var(--charcoal);
+  --color-charcoal-lift: var(--charcoal-lift);
+  --color-gold: var(--gold);
+  --color-gold-bright: var(--gold-bright);
+  --color-gold-dim: var(--gold-dim);
+}
+
+/* Typefaces: monumental Roman caps, high-contrast French elegance, geometric label */
+@theme {
+  --font-monument: "Cinzel", "Times New Roman", serif;
+  --font-elegant: "Cormorant Garamond", Georgia, serif;
+  --font-label: "Jost", "Futura", sans-serif;
 }
 
 :root {
@@ -95,6 +111,59 @@
   --sidebar-accent-foreground: oklch(0.208 0.042 265.755);
   --sidebar-border: oklch(0.929 0.013 255.508);
   --sidebar-ring: oklch(0.704 0.04 256.788);
+
+  /* ── Skyforge armory palette ─────────────────────────────────────────
+   * ink          #0b0b0d  near-black
+   * charcoal     #17161a  card surface
+   * gold         #8a7245  aged gold, the workhorse
+   * gold-bright  #d8b26a  highlight / the type that must land
+   * gold-dim     #5d4d31  recessed rules and captions
+   */
+  --ink: oklch(0.145 0.006 285);
+  --ink-deep: oklch(0.108 0.005 285);
+  --charcoal: oklch(0.205 0.012 288);
+  --charcoal-lift: oklch(0.268 0.016 288);
+  --gold: oklch(0.605 0.085 72);
+  --gold-bright: oklch(0.795 0.1 80);
+  --gold-dim: oklch(0.45 0.055 68);
+
+  --gradient-gold-edge: linear-gradient(
+    148deg,
+    var(--gold-dim) 0%,
+    var(--gold) 22%,
+    var(--gold-bright) 42%,
+    var(--gold) 58%,
+    var(--gold-dim) 100%
+  );
+  --gradient-surface: radial-gradient(
+    118% 86% at 50% -8%,
+    var(--charcoal-lift) 0%,
+    var(--charcoal) 46%,
+    var(--ink-deep) 100%
+  );
+  --gradient-scrim: linear-gradient(
+    to top,
+    oklch(0.108 0.005 285 / 0.95) 0%,
+    oklch(0.108 0.005 285 / 0.78) 30%,
+    oklch(0.108 0.005 285 / 0.28) 58%,
+    transparent 82%
+  );
+  --shadow-plate: 0 48px 92px -48px oklch(0 0 0 / 0.92);
+
+  /* ── Per-blade geometry. Defaults = balanced longsword. ───────────── */
+  --plate-ratio: 1 / 1;
+  --edge-width: 1.5px;
+  --edge-radius: 4px;
+  --edge-clip: none;
+  --face-radius: 3px;
+  --face-clip: none;
+  --slot-inset: 16px;
+  --slot-radius: 4px;
+  --slot-clip: none;
+  --slot-mark: 0.14;
+  --pad: clamp(1.5rem, 5.5%, 2.75rem);
+  --pad-top: var(--pad);
+  --top-inset: 0px;
 }
 
 .dark {
@@ -130,6 +199,14 @@
   --sidebar-accent-foreground: oklch(0.984 0.003 247.858);
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.551 0.027 264.364);
+
+  --ink: oklch(0.145 0.006 285);
+  --ink-deep: oklch(0.108 0.005 285);
+  --charcoal: oklch(0.205 0.012 288);
+  --charcoal-lift: oklch(0.268 0.016 288);
+  --gold: oklch(0.605 0.085 72);
+  --gold-bright: oklch(0.795 0.1 80);
+  --gold-dim: oklch(0.45 0.055 68);
 }
 
 @layer base {
@@ -138,7 +215,163 @@
   }
 
   body {
-    background-color: var(--color-background);
-    color: var(--color-foreground);
+    background-color: var(--color-ink);
+    color: var(--color-gold-bright);
+    -webkit-font-smoothing: antialiased;
+  }
+}
+
+/* ── Card structure ────────────────────────────────────────────────────
+ * The plate is the outer gold "edge" layer; the face sits inset by
+ * --edge-width, so the forged outline follows any clip or radius the
+ * blade profile asks for.
+ */
+@utility skyforge-plate {
+  position: relative;
+  display: grid;
+  width: min(92vw, 620px);
+  aspect-ratio: var(--plate-ratio);
+  isolation: isolate;
+  filter: drop-shadow(var(--shadow-plate));
+  animation: skyforge-rise 900ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+@utility skyforge-edge {
+  position: relative;
+  overflow: hidden;
+  padding: var(--edge-width);
+  border-radius: var(--edge-radius);
+  clip-path: var(--edge-clip);
+  background: var(--gradient-gold-edge);
+  transition: filter 700ms ease;
+
+  &::after {
+    content: "";
+    position: absolute;
+    inset: -45%;
+    pointer-events: none;
+    background: linear-gradient(
+      104deg,
+      transparent 41%,
+      oklch(1 0 0 / 0.5) 50%,
+      transparent 59%
+    );
+    mix-blend-mode: screen;
+    transform: translateX(-115%);
+    animation: skyforge-sheen 11s ease-in-out infinite;
+  }
+}
+
+@utility skyforge-face {
+  position: relative;
+  height: 100%;
+  overflow: hidden;
+  border-radius: var(--face-radius);
+  clip-path: var(--face-clip);
+  background: var(--gradient-surface);
+}
+
+/* The image area: an empty, clearly bounded frame waiting for photography. */
+@utility skyforge-slot {
+  position: absolute;
+  inset: var(--slot-inset);
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  border: 1px solid color-mix(in oklab, var(--gold) 42%, transparent);
+  border-radius: var(--slot-radius);
+  clip-path: var(--slot-clip);
+  background:
+    radial-gradient(
+      76% 64% at 50% 42%,
+      oklch(0.245 0.013 288 / 0.9) 0%,
+      oklch(0.15 0.008 285 / 0.95) 72%
+    );
+
+  &::before,
+  &::after {
+    content: "";
+    position: absolute;
+    background: color-mix(
+      in oklab,
+      var(--gold) calc(var(--slot-mark) * 100%),
+      transparent
+    );
+  }
+
+  &::before {
+    inset-inline: 0;
+    top: 50%;
+    height: 1px;
+  }
+
+  &::after {
+    inset-block: 0;
+    left: 50%;
+    width: 1px;
+  }
+}
+
+@utility skyforge-scrim {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: var(--gradient-scrim);
+}
+
+@utility skyforge-content {
+  position: relative;
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: var(--pad);
+  padding-top: var(--pad-top);
+}
+
+@utility skyforge-crown {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-inline: var(--top-inset);
+}
+
+/* Hairline around the image area, drawn above the scrim so the frame keeps
+ * reading once a photograph is in place. */
+@utility skyforge-frame {
+  position: absolute;
+  inset: var(--slot-inset);
+  pointer-events: none;
+  border: 1px solid color-mix(in oklab, var(--gold) 55%, transparent);
+  border-radius: var(--slot-radius);
+  clip-path: var(--slot-clip);
+}
+
+@keyframes skyforge-sheen {
+  0%,
+  62% {
+    transform: translateX(-115%);
+  }
+  88%,
+  100% {
+    transform: translateX(115%);
+  }
+}
+
+@keyframes skyforge-rise {
+  from {
+    opacity: 0;
+    transform: translateY(18px) scale(0.985);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skyforge-plate,
+  .skyforge-edge::after {
+    animation: none;
   }
 }
