@@ -44,7 +44,7 @@ export function SkyforgeCard({
             ) : (
               <span
                 className={cn(
-                  "relative z-10 font-label uppercase text-[0.5rem] tracking-[0.34em] text-gold/65",
+                  "relative z-10 font-label uppercase text-[0.5rem] tracking-[0.34em] text-gold-bright/60",
                   "transition-opacity duration-500 group-hover:opacity-70",
                 )}
               >
@@ -54,6 +54,7 @@ export function SkyforgeCard({
           </div>
 
           <div className="skyforge-scrim" />
+          <div className="skyforge-frame" aria-hidden="true" />
 
           <div className="skyforge-content">
             <div className="skyforge-crown">

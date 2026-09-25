@@ -336,6 +336,17 @@
   margin-inline: var(--top-inset);
 }
 
+/* Hairline around the image area, drawn above the scrim so the frame keeps
+ * reading once a photograph is in place. */
+@utility skyforge-frame {
+  position: absolute;
+  inset: var(--slot-inset);
+  pointer-events: none;
+  border: 1px solid color-mix(in oklab, var(--gold) 55%, transparent);
+  border-radius: var(--slot-radius);
+  clip-path: var(--slot-clip);
+}
+
 @keyframes skyforge-sheen {
   0%,
   62% {
